@@ -1,5 +1,6 @@
 package com.agesadev.shipswezacare.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,31 +53,54 @@ class ShipRecyclerViewAdapter : RecyclerView.Adapter<ShipRecyclerViewAdapter.Shi
             Glide.with(itemView.context)
                 .load(ship.image)
                 .apply(RequestOptions.centerCropTransform())
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.ship_placeholder)
                 .into(shipImage)
             singleShipCard.setOnClickListener {
                 //display the data on bottom sheet dialog
-                val bottomSheet = BottomSheetDialog(itemView.context)
-                val view2: View =
-                    LayoutInflater.from(itemView.context).inflate(R.layout.ship_bottom_sheet, null)
-                val shipImageSheet: ImageView = view2.findViewById(R.id.shipImageSheet)
-                val shipNameSheet: TextView = view2.findViewById(R.id.shipNameSheet)
-                val shipStatusSheet: TextView = view2.findViewById(R.id.shipStatusSheet)
-                val shipYearBuiltSheet: TextView = view2.findViewById(R.id.yearBuilt)
-                Glide.with(itemView.context)
-                    .load(ship.image)
-                    .apply(RequestOptions.centerCropTransform())
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .into(shipImageSheet)
-                shipNameSheet.text = ship.ship_name
-//                if(ship.active){
-//                    shipStatusSheet.text="Active"
-//                }
-                shipYearBuiltSheet.text = ship.year_built.toString()
-                bottomSheet.setContentView(view2)
-                bottomSheet.show()
+                displayBottomSheetDialog(ship)
             }
 
+        }
+
+        private fun displayBottomSheetDialog(ship: Ship) {
+            val bottomSheet = BottomSheetDialog(itemView.context)
+            val view2: View =
+                LayoutInflater.from(itemView.context).inflate(R.layout.ship_bottom_sheet, null)
+            val shipImageSheet: ImageView = view2.findViewById(R.id.shipImageSheet)
+            val shipNameSheet: TextView = view2.findViewById(R.id.shipNameSheet)
+            val shipStatusSheet: TextView = view2.findViewById(R.id.shipStatusSheet)
+            val shipYearBuiltSheet: TextView = view2.findViewById(R.id.yearBuilt)
+            val shipPort: TextView = view2.findViewById(R.id.homePort)
+            val shipModel: TextView = view2.findViewById(R.id.shipModel)
+            Glide.with(itemView.context)
+                .load(ship.image)
+                .apply(RequestOptions.centerCropTransform())
+                .placeholder(R.drawable.ship_placeholder)
+                .into(shipImageSheet)
+            shipYearBuiltSheet.text = ship.year_built.toString()
+            if (ship.home_port == null) {
+                shipPort.text = "N/A"
+            } else {
+                shipPort.text = ship.home_port
+            }
+
+            if (ship.ship_model == null) {
+                shipModel.text = "N/A"
+            } else {
+                shipModel.text = ship.ship_model
+            }
+
+            shipNameSheet.text = ship.ship_name
+            if (ship.active) {
+                shipStatusSheet.setTextColor(Color.GREEN)
+                shipStatusSheet.text = "Active"
+            } else {
+                shipStatusSheet.setTextColor(Color.RED)
+                shipStatusSheet.text = "InActive"
+
+            }
+            bottomSheet.setContentView(view2)
+            bottomSheet.show()
         }
     }
 }

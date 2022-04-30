@@ -9,4 +9,5 @@ data class Ship(
     val weight_kg: Int,
     val image: String,
     val year_built: Int,
+    val home_port:String
 )
