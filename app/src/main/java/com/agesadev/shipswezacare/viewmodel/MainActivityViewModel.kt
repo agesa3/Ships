@@ -12,7 +12,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
     @Inject
     lateinit var mService: RetrofitServiceInterface
-    private lateinit var liveDataList: MutableLiveData<List<Ship>>
+    private var liveDataList: MutableLiveData<List<Ship>>
 
     init {
         (application as MyApplication).getRetroComponent().inject(this)
@@ -38,5 +38,10 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
         })
     }
+
+
+
+
+
 
 }
