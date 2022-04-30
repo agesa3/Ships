@@ -1,8 +1,9 @@
-package com.agesadev.shipswezacare
+package com.agesadev.shipswezacare.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.agesadev.shipswezacare.MyApplication
 import com.agesadev.shipswezacare.di.RetrofitServiceInterface
 import com.agesadev.shipswezacare.model.Ship
 import javax.inject.Inject
@@ -25,7 +26,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     fun makeApiCall() {
         mService.getShips().enqueue(object : retrofit2.Callback<List<Ship>> {
             override fun onFailure(call: retrofit2.Call<List<Ship>>, t: Throwable) {
-                liveDataList.value = null
+
             }
 
             override fun onResponse(

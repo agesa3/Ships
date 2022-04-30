@@ -10,6 +10,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:id="@+id/single_ship_card"
         android:layout_marginTop="8dp"
         android:elevation="10dp"
         app:cardCornerRadius="10dp"

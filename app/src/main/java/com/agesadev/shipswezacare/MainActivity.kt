@@ -4,7 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.agesadev.shipswezacare.model.Ship
+import com.agesadev.shipswezacare.adapters.ShipRecyclerViewAdapter
+import com.agesadev.shipswezacare.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
